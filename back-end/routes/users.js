@@ -46,6 +46,7 @@ users.post('/login', async (req, res) => {
 //Inserts a new user in our database id field are complete
 users.post('/register', async (req, res) => {
     
+    let username = req.body.username
     let name = req.body.name
     let surname = req.body.surname
 	let password = req.body.password
@@ -53,11 +54,11 @@ users.post('/register', async (req, res) => {
     let gender = req.body.gender
     let age = req.body.age
     let email= req.body.email
-    if (name && surname && password && private && gender && age && email) 
+    if (username && name && surname && password && private && gender && age && email) 
     {
         try
         {
-         let queryResult=await db.AddUser(name,surname,password,private,gender,age,email);
+         let queryResult=await db.AddUser(username,name,surname,password,private,gender,age,email);
          if (queryResult.affectedRows) {
             console.log("New user added!!")
           }
