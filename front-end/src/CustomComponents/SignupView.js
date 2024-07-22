@@ -22,6 +22,7 @@ class SignupView extends React.Component
 
     QPostSignup=()=>{
         axios.post('http://88.200.63.148:5000/users/register',{
+          username:this.state.user.username,
           name:this.state.user.name,
           surname:this.state.user.surname,
           password:this.state.user.password,
@@ -44,6 +45,10 @@ class SignupView extends React.Component
     return(
 <div className="card" style={{width:"400px", marginLeft:"auto", marginRight:"auto", marginTop:"10px", marginBottom:"10px"}}>
 <form style={{margin:"20px"}} >
+  <div className="mb-3">
+    <label className="form-label">Username</label>
+    <input onChange={(e)=>this.QGetTextFromField(e)} name="username" type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+  </div>
   <div className="mb-3">
     <label className="form-label">Name</label>
     <input onChange={(e)=>this.QGetTextFromField(e)} name="name" type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
