@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 class LoginView extends React.Component
 {
@@ -17,9 +18,23 @@ class LoginView extends React.Component
         }))
     }
 
-    QSendUserToParent = (state) => {
-        this.props.QUserFromChild(this.state.user)
+    QSendUserToParent = (obj) => {
+        this.props.QUserFromChild(obj)
     }
+
+    QPostLogin=()=>{
+        let user = this.state.user
+        axios.post('http://88.200.63.148:5000/users/login',{
+          username:user.username,
+          password:user.password
+        },{withCredentials:true})
+        .then(res=>{
+            console.log("Sent to server...")
+            console.log(res.data)
+            this.QSendUserToParent(res.data)
+        })
+      }    
+  
 
 
   render()
@@ -36,7 +51,7 @@ class LoginView extends React.Component
         <input onChange={(e)=>this.QGetTextFromField(e)} name="password" type="password" className="form-control" id="exampleInputPassword1"/>
       </div>
     </form>
-    <button onClick={()=>this.QSendUserToParent(this.state)} style={{margin:"10px"}} className="btn btn-primary bt">Sign up</button>
+    <button onClick={()=>this.QPostLogin()} style={{margin:"10px"}} className="btn btn-primary bt">Log in</button>
   </div>
     )
   }

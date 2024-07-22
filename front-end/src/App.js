@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import HomeView from "./CustomComponents/HomeView";
 import AboutView from "./CustomComponents/AboutView";
 import LoginView from "./CustomComponents/LoginView";
@@ -13,7 +14,8 @@ class App extends React.Component
       {
         super(props);
         this.state={
-          CurrentPage: "none"
+          currentPage: "none",
+          userStatus:{logged:false}
         }
       } 
 
@@ -30,19 +32,28 @@ class App extends React.Component
            switch(page)
            {  
              case "home":
-               return <HomeView/> 
+               return state.userStatus.logged ? <HomeView/> : "You are not logged in"
              case "about":
                return <AboutView/>
              case "signup":
                return <SignupView/>
              case "login":
-               return <LoginView QUserFromChild={this.QHandleUserLog}/>
+               return <LoginView QUserFromChild={this.QSetUser}/>
            }
         }
        
 
-        QHandleUserLog = (obj) => {
-          this.QSetView({page:"home"})
+        QSetUser = (obj) => {
+          this.setState({
+            userStatus: {logged:true,user:obj}
+          })
+        }
+
+        componentDidMount(){
+          axios.get("http://88.200.63.148:5000/users/login")
+          .then(res=>{
+            console.log(res)
+          })
         }
 
         render()
