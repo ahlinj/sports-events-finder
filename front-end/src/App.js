@@ -34,7 +34,7 @@ class App extends React.Component
              case "about":
                return <AboutView/>
              case "signup":
-               return <SignupView QUserFromChild={this.QHandleUserLog}/>
+               return <SignupView/>
              case "login":
                return <LoginView QUserFromChild={this.QHandleUserLog}/>
            }
