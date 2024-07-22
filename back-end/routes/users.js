@@ -9,7 +9,7 @@ users.post('/login', async (req, res) => {
     {
         try
         {
-         let queryResult=await DB.AuthUser(name);
+         let queryResult=await db.AuthUser(name);
         
                 if(queryResult.length>0)
                 {
@@ -57,7 +57,7 @@ users.post('/register', async (req, res) => {
     {
         try
         {
-         let queryResult=await DB.AddUser(name,surname,password,private,gender,age,email);
+         let queryResult=await db.AddUser(name,surname,password,private,gender,age,email);
          if (queryResult.affectedRows) {
             console.log("New user added!!")
           }

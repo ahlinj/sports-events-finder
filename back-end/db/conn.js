@@ -20,7 +20,7 @@ const  conn = mysql.createConnection({
     
     dataPool.AddUser=(name,surname,password,private,gender,age,email)=>{
       return new Promise ((resolve, reject)=>{
-        conn.query(`INSERT INTO Uporabnik (ime,priimek,geslo,(ne)privat,spol,starost,eposta) VALUES (?,?,?,?,?,?,?)`, [name,surname,password,private,gender,age,email ], (err,res)=>{
+        conn.query(`INSERT INTO Uporabnik (ime,priimek,geslo,privat,spol,starost,eposta) VALUES (?,?,?,?,?,?,?)`, [name,surname,password,private,gender,age,email ], (err,res)=>{
           if(err){return reject(err)}
           return resolve(res)
         })
