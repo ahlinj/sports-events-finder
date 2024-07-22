@@ -1,23 +1,45 @@
 const express = require("express")
+const session = require("express-session")
 const users = express.Router()
 const db = require("../db/conn.js")
 
+users.use(session({
+    secret:"somesecrets",
+    resave:false,
+    saveUninitialized:false,
+    cookies:{
+        expires: 60*2
+    }
+}))
+
+users.get('/login', (req,res) => {
+    if(req.session.user){
+        res.send({
+            logged:true,
+            user:req.session.user
+        })
+    }else{
+        res.send({logged:false})
+    }
+})
+
 users.post('/login', async (req, res) => {
-    var name = req.body.name;
-	var password = req.body.password;
-    if (name && password) 
+    let username = req.body.username;
+	let password = req.body.password;
+    if (username && password) 
     {
         try
         {
-         let queryResult=await db.AuthUser(name);
+         let queryResult=await db.AuthUser(username);
         
                 if(queryResult.length>0)
                 {
                     if(password===queryResult[0].geslo)
                     {
-                    req.session.user=queryResult;
+                    req.session.user=queryResult[0];
+                    res.json(queryResult[0].username)
                     console.log(req.session.user)
-                     console.log(queryResult)
+                     console.log(queryResult[0].username)
                      console.log("SESSION VALID");
                     
                      //res.redirect('/');
