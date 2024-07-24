@@ -8,16 +8,27 @@ class SignupView extends React.Component
         super(props)
         this.state={
             user:{
-                type:"signup"
+                type:"signup",
+                isPrivate: 0
             }
         }
     }
 
-    QGetTextFromField = (e) => {
+    QGetTextFromField=(e)=>{
         this.setState(prevState=>({
             user:{...prevState.user,[e.target.name]:e.target.value}
-        }))
-    }
+          }))
+      }
+    
+
+      handleCheckboxChange = (e) => {
+        const { name, checked } = e.target;
+        const fieldValue = checked ? 1 : 0;
+    
+        this.setState(prevState => ({
+            user:{...prevState.user,[name]:fieldValue}
+        }));
+      }
 
 
     QPostSignup=()=>{
@@ -26,7 +37,7 @@ class SignupView extends React.Component
           name:this.state.user.name,
           surname:this.state.user.surname,
           password:this.state.user.password,
-          private:this.state.user.private,
+          isPrivate:this.state.user.isPrivate,
           gender:this.state.user.gender,
           age:this.state.user.age,
           email:this.state.user.email,
@@ -61,13 +72,13 @@ class SignupView extends React.Component
     <label className="form-label">Password</label>
     <input onChange={(e)=>this.QGetTextFromField(e)} name="password" type="password" className="form-control" id="exampleInputPassword1"/>
   </div>
-  <div className="mb-3">
+  <div className="mb-3 form-check">
     <label className="form-label">Private</label>
-    <input onChange={(e)=>this.QGetTextFromField(e)} name="private" type="text" className="form-control" id="exampleInputEmail11"/>
+    <input onChange={(e)=>this.handleCheckboxChange(e)} name="isPrivate" type="checkbox" className="form-check-input" id="exampleInputEmail11" />
   </div>
   <div className="mb-3">
     <label className="form-label">Gender</label>
-    <input onChange={(e)=>this.QGetTextFromField(e)} name="gender" type="text" className="form-control" id="exampleInputEmail1"/>
+    <input onChange={(e)=>this.QGetTextFromField(e)} name="gender" type="text" className="form-control" id="exampleInputEmail1" />
   </div>
   <div className="mb-3">
     <label className="form-label">Age</label>
