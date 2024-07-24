@@ -77,9 +77,13 @@ class SignupView extends React.Component
     <input onChange={(e)=>this.handleCheckboxChange(e)} name="isPrivate" type="checkbox" className="form-check-input" id="exampleInputEmail11" />
   </div>
   <div className="mb-3">
-    <label className="form-label">Gender</label>
-    <input onChange={(e)=>this.QGetTextFromField(e)} name="gender" type="text" className="form-control" id="exampleInputEmail1" />
-  </div>
+            <label className="form-label">Gender</label>
+            <select onChange={(e)=>this.QGetTextFromField(e)} name="gender" className="form-control" value={this.state.user.gender}>
+              <option value="m">Male</option>
+              <option value="f">Female</option>
+              <option value="o">Other</option>
+            </select>
+          </div>
   <div className="mb-3">
     <label className="form-label">Age</label>
     <input onChange={(e)=>this.QGetTextFromField(e)} name="age" type="text" className="form-control" id="exampleInputEmail1"/>
