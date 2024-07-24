@@ -4,6 +4,9 @@ import HomeView from "./CustomComponents/HomeView";
 import AboutView from "./CustomComponents/AboutView";
 import LoginView from "./CustomComponents/LoginView";
 import SignupView from "./CustomComponents/SignupView";
+import EventsView from "./CustomComponents/EventsView";
+import PrizesView from "./CustomComponents/PrizesView";
+import OrganizationsView from "./CustomComponents/OrganizationsView";
 
 
 
@@ -39,6 +42,12 @@ class App extends React.Component
                return <SignupView/>
              case "login":
                return <LoginView QUserFromChild={this.QSetUser}/>
+             case "events":
+               return <EventsView/>
+             case "prizes":
+               return <PrizesView/>
+             case "organizations":
+               return <OrganizationsView/>
            }
         }
        
@@ -82,6 +91,18 @@ class App extends React.Component
              
                                  <li className="nav-item" >
                                    <a onClick={()=>this.QSetView({page:"login"})} className="nav-link "  href="#">Login</a>
+                                 </li>
+
+                                 <li className="nav-item" >
+                                   <a onClick={()=>this.QSetView({page:"events"})} className="nav-link "  href="#">Events</a>
+                                 </li>
+
+                                 <li className="nav-item" >
+                                   <a onClick={()=>this.QSetView({page:"prizes"})} className="nav-link "  href="#">Prizes</a>
+                                 </li>
+
+                                 <li className="nav-item" >
+                                   <a onClick={()=>this.QSetView({page:"organizations"})} className="nav-link "  href="#">Organizations</a>
                                  </li>
                                </ul>
                              </div>
