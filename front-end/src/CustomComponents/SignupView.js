@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from "axios"
+import { API_URL } from "../Utils/Configuration"
 
 class SignupView extends React.Component
 {
@@ -32,7 +33,7 @@ class SignupView extends React.Component
 
 
     QPostSignup=()=>{
-        axios.post('http://88.200.63.148:5000/users/register',{
+        axios.post(API_URL+'/users/register',{
           username:this.state.user.username,
           name:this.state.user.name,
           surname:this.state.user.surname,

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { ABOUT, EVENTS, HOME, LOGIN, ORGLOGIN, ORGSIGNUP, ORGS, SIGNUP, PRIZES } from "./Utils/Constants.js"
 import HomeView from "./CustomComponents/HomeView";
 import AboutView from "./CustomComponents/AboutView";
 import LoginView from "./CustomComponents/LoginView";
@@ -19,7 +20,7 @@ class App extends React.Component
       {
         super(props);
         this.state={
-          currentPage: "none",
+          currentPage: HOME,
           userStatus:{logged:false},
           organizationStatus:{logged:false}
         }
@@ -37,23 +38,23 @@ class App extends React.Component
        
            switch(page)
            {  
-             case "home":
+             case HOME:
                return state.userStatus.logged ? <HomeView/> : "You are not logged in"
-             case "about":
+             case ABOUT:
                return <AboutView/>
-             case "signup":
+             case SIGNUP:
                return state.organizationStatus.logged ? "You are logged as an organiziation" : <SignupView/>
-             case "login":
+             case LOGIN:
                return <LoginView QUserFromChild={this.QSetUser}/>
-             case "events":
+             case EVENTS:
                return <EventsView/>
-             case "prizes":
+             case PRIZES:
                return <PrizesView/>
-             case "organizations":
+             case ORGS:
                return <OrganizationsView/>
-             case "organizationSignUp":
+             case ORGSIGNUP:
                return <OrganizationSignUpView/>
-             case "organizationLogIn":
+             case ORGLOGIN:
                return <OrganizationLoginView QUserFromChild={this.QSetOrganization}/>
            }
         }
@@ -80,7 +81,7 @@ class App extends React.Component
                      <div id="menu" className="row">
                        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
                            <div className="container-fluid">
-                             <a onClick={()=>this.QSetView({page:"home"})} className="navbar-brand" href="#">Home</a>
+                             <a onClick={()=>this.QSetView({page:HOME})} className="navbar-brand" href="#">Home</a>
                              <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                <span className="navbar-toggler-icon"></span>
                              </button>
@@ -88,34 +89,34 @@ class App extends React.Component
                              <div className="collapse navbar-collapse" id="navbarSupportedContent">
                                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                  <li className="nav-item">
-                                   <a onClick={()=>this.QSetView({page:"about"})} className="nav-link " href="#">About</a>
+                                   <a onClick={()=>this.QSetView({page:ABOUT})} className="nav-link " href="#">About</a>
                                  </li>
              
                                  <li className="nav-item"> 
-                                   <a onClick={()=>this.QSetView({page:"signup"})} className="nav-link " href="#">Signup</a>
+                                   <a onClick={()=>this.QSetView({page:SIGNUP})} className="nav-link " href="#">Signup</a>
                                  </li>
              
                                  <li className="nav-item" >
-                                   <a onClick={()=>this.QSetView({page:"login"})} className="nav-link "  href="#">Login</a>
+                                   <a onClick={()=>this.QSetView({page:LOGIN})} className="nav-link "  href="#">Login</a>
                                  </li>
 
                                  <li className="nav-item" >
-                                   <a onClick={()=>this.QSetView({page:"events"})} className="nav-link "  href="#">Events</a>
+                                   <a onClick={()=>this.QSetView({page:EVENTS})} className="nav-link "  href="#">Events</a>
                                  </li>
 
                                  <li className="nav-item" >
-                                   <a onClick={()=>this.QSetView({page:"prizes"})} className="nav-link "  href="#">Prizes</a>
+                                   <a onClick={()=>this.QSetView({page:PRIZES})} className="nav-link "  href="#">Prizes</a>
                                  </li>
 
                                  <li className="nav-item" >
-                                   <a onClick={()=>this.QSetView({page:"organizations"})} className="nav-link "  href="#">Organizations</a>
+                                   <a onClick={()=>this.QSetView({page:ORGS})} className="nav-link "  href="#">Organizations</a>
                                  </li>
 
                                  <li className="nav-item" >
-                                   <a onClick={()=>this.QSetView({page:"organizationSignUp"})} className="nav-link "  href="#">Organization Signup</a>
+                                   <a onClick={()=>this.QSetView({page:ORGSIGNUP})} className="nav-link "  href="#">Organization Signup</a>
                                  </li>
                                  <li className="nav-item" >
-                                   <a onClick={()=>this.QSetView({page:"organizationLogIn"})} className="nav-link "  href="#">Organization Login</a>
+                                   <a onClick={()=>this.QSetView({page:ORGLOGIN})} className="nav-link "  href="#">Organization Login</a>
                                  </li>
                                </ul>
                              </div>

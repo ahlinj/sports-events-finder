@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { API_URL } from "../Utils/Configuration.js"
 
 class OrganizationLoginView extends React.Component
 {
@@ -24,7 +25,7 @@ class OrganizationLoginView extends React.Component
 
     QPostLogin=()=>{
         let organization = this.state.organization
-        axios.post('http://88.200.63.148:5000/organizations/login',{
+        axios.post(API_URL+'/organizations/login',{
           username:organization.username,
           password:organization.password
         },{withCredentials:true})
