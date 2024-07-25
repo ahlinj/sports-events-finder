@@ -7,6 +7,8 @@ import SignupView from "./CustomComponents/SignupView";
 import EventsView from "./CustomComponents/EventsView";
 import PrizesView from "./CustomComponents/PrizesView";
 import OrganizationsView from "./CustomComponents/OrganizationsView";
+import OrganizationSignUpView from "./CustomComponents/OrganizationSignUpView";
+import OrganizationLoginView from "./CustomComponents/OrganizationLoginView";
 
 
 
@@ -48,6 +50,10 @@ class App extends React.Component
                return <PrizesView/>
              case "organizations":
                return <OrganizationsView/>
+             case "organizationSignUp":
+               return <OrganizationSignUpView/>
+             case "organizationLogIn":
+               return <OrganizationLoginView/>
            }
         }
        
@@ -86,7 +92,7 @@ class App extends React.Component
                                  </li>
              
                                  <li className="nav-item"> 
-                                   <a onClick={()=>this.QSetView({page:"signup"})} className="nav-link " href="#">Sign up</a>
+                                   <a onClick={()=>this.QSetView({page:"signup"})} className="nav-link " href="#">Signup</a>
                                  </li>
              
                                  <li className="nav-item" >
@@ -103,6 +109,13 @@ class App extends React.Component
 
                                  <li className="nav-item" >
                                    <a onClick={()=>this.QSetView({page:"organizations"})} className="nav-link "  href="#">Organizations</a>
+                                 </li>
+
+                                 <li className="nav-item" >
+                                   <a onClick={()=>this.QSetView({page:"organizationSignUp"})} className="nav-link "  href="#">Organization Signup</a>
+                                 </li>
+                                 <li className="nav-item" >
+                                   <a onClick={()=>this.QSetView({page:"organizationLogIn"})} className="nav-link "  href="#">Organization Login</a>
                                  </li>
                                </ul>
                              </div>
