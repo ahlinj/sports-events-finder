@@ -20,7 +20,8 @@ class App extends React.Component
         super(props);
         this.state={
           currentPage: "none",
-          userStatus:{logged:false}
+          userStatus:{logged:false},
+          organizationStatus:{logged:false}
         }
       } 
 
@@ -41,7 +42,7 @@ class App extends React.Component
              case "about":
                return <AboutView/>
              case "signup":
-               return <SignupView/>
+               return state.organizationStatus.logged ? "You are logged as an organiziation" : <SignupView/>
              case "login":
                return <LoginView QUserFromChild={this.QSetUser}/>
              case "events":
@@ -53,7 +54,7 @@ class App extends React.Component
              case "organizationSignUp":
                return <OrganizationSignUpView/>
              case "organizationLogIn":
-               return <OrganizationLoginView/>
+               return <OrganizationLoginView QUserFromChild={this.QSetOrganization}/>
            }
         }
        
@@ -64,10 +65,9 @@ class App extends React.Component
           })
         }
 
-        componentDidMount(){
-          axios.get("http://88.200.63.148:5000/users/login")
-          .then(res=>{
-            console.log(res)
+        QSetOrganization = (obj) => {
+          this.setState({
+            organizationStatus:{logged:true,organization:obj}
           })
         }
 
