@@ -26,6 +26,25 @@ const  conn = mysql.createConnection({
         })
       })
     }
+
+    dataPool.AuthOrganization=(name)=>{
+        return new Promise ((resolve, reject)=>{
+          conn.query('SELECT * FROM Organizacija WHERE ime = ?', name, (err,res, fields)=>{
+            if(err){return reject(err)}
+            return resolve(res)
+          })
+        })  
+          
+      }
+
+      dataPool.AddOrganization=(username,name,password,address,email)=>{
+        return new Promise ((resolve, reject)=>{
+          conn.query(`INSERT INTO Organizacija (username,ime,geslo,naslov,eposta) VALUES (?,?,?,?,?)`, [username,name,password,address,email], (err,res)=>{
+            if(err){return reject(err)}
+            return resolve(res)
+          })
+        })
+      }
     
 
 

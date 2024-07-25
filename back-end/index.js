@@ -7,6 +7,7 @@ dotenv.config()
 
 const port = 5000
 const users = require("./routes/users.js")
+const organizations = require("./routes/organizations.js")
 
 
 app.use(cookieParser("somesecrets"))
@@ -14,8 +15,8 @@ app.use(express.json())
 app.use(express.urlencoded({extended : true}));
 app.use(cors({
   methods:["GET", "POST"],
-  origin: 'http://localhost:3000', // Replace with your frontend origin
-  credentials: true // Allow cookies and other credentials
+  origin: 'http://localhost:3000', 
+  credentials: true 
 }))
 
 
@@ -25,6 +26,7 @@ res.send("hola")
 })
 
 app.use("/users",users)
+app.use("/organizations",organizations)
 
 ///App listening on port
 app.listen(process.env.PORT || port, ()=>{
