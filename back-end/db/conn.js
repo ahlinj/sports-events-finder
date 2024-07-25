@@ -8,7 +8,7 @@ const  conn = mysql.createConnection({
 
   let dataPool={}
 
-  dataPool.AuthUser=(name)=>{
+    dataPool.AuthUser=(name)=>{
       return new Promise ((resolve, reject)=>{
         conn.query('SELECT * FROM Uporabnik WHERE ime = ?', name, (err,res, fields)=>{
           if(err){return reject(err)}
@@ -37,15 +37,23 @@ const  conn = mysql.createConnection({
           
       }
 
-      dataPool.AddOrganization=(username,name,password,address,email)=>{
-        return new Promise ((resolve, reject)=>{
-          conn.query(`INSERT INTO Organizacija (username,ime,geslo,naslov,eposta) VALUES (?,?,?,?,?)`, [username,name,password,address,email], (err,res)=>{
-            if(err){return reject(err)}
-            return resolve(res)
-          })
+    dataPool.AddOrganization=(username,name,password,address,email)=>{
+    return new Promise ((resolve, reject)=>{
+        conn.query(`INSERT INTO Organizacija (username,ime,geslo,naslov,eposta) VALUES (?,?,?,?,?)`, [username,name,password,address,email], (err,res)=>{
+        if(err){return reject(err)}
+        return resolve(res)
         })
-      }
-    
+    })
+    }
+
+    dataPool.AddEvent=(name,description,location,dateTime,organization)=>{
+    return new Promise ((resolve, reject)=>{
+        conn.query(`INSERT INTO Dogodek (ime,opis,lokacija,datumCas,o_ID) VALUES (?,?,?,?,?)`, [name,description,location,dateTime,organization], (err,res)=>{
+        if(err){return reject(err)}
+        return resolve(res)
+        })
+    })
+    } 
 
 
  conn.connect((err) => {
