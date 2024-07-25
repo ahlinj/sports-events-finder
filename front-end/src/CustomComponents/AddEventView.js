@@ -49,7 +49,7 @@ class AddEventView extends React.Component
   </div>
   <div className="mb-3">
     <label className="form-label">Description</label>
-    <input onChange={(e)=>this.QGetTextFromField(e)} name="description" type="text" className="form-control" id="exampleInputEmail1"/>
+    <textarea onChange={(e)=>this.QGetTextFromField(e)} name="description" type="text" className="form-control" id="exampleInputEmail1" rows="4"/>
   </div>
   <div className="mb-3">
     <label className="form-label">Location</label>
