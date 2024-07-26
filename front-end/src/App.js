@@ -116,11 +116,11 @@ class App extends React.Component
                                  {!this.state.organizationStatus.logged && !this.state.userStatus.logged && (
                                  <>
                                   <li className="nav-item"> 
-                                   <a onClick={()=>this.QSetView({page:SIGNUP})} className="nav-link " href="#">Signup</a>
+                                   <a onClick={()=>this.QSetView({page:SIGNUP})} className="nav-link " href="#">User Signup</a>
                                   </li>
              
                                   <li className="nav-item" >
-                                   <a onClick={()=>this.QSetView({page:LOGIN})} className="nav-link "  href="#">Login</a>
+                                   <a onClick={()=>this.QSetView({page:LOGIN})} className="nav-link "  href="#"> User Login</a>
                                   </li>
 
                                   <li className="nav-item" >
