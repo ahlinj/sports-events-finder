@@ -94,14 +94,6 @@ class App extends React.Component
                                  <li className="nav-item">
                                    <a onClick={()=>this.QSetView({page:ABOUT})} className="nav-link " href="#">About</a>
                                  </li>
-             
-                                 <li className="nav-item"> 
-                                   <a onClick={()=>this.QSetView({page:SIGNUP})} className="nav-link " href="#">Signup</a>
-                                 </li>
-             
-                                 <li className="nav-item" >
-                                   <a onClick={()=>this.QSetView({page:LOGIN})} className="nav-link "  href="#">Login</a>
-                                 </li>
 
                                  <li className="nav-item" >
                                    <a onClick={()=>this.QSetView({page:EVENTS})} className="nav-link "  href="#">Events</a>
@@ -115,17 +107,31 @@ class App extends React.Component
                                    <a onClick={()=>this.QSetView({page:ORGS})} className="nav-link "  href="#">Organizations</a>
                                  </li>
 
-                                 <li className="nav-item" >
-                                   <a onClick={()=>this.QSetView({page:ORGSIGNUP})} className="nav-link "  href="#">Organization Signup</a>
-                                 </li>
-
-                                 <li className="nav-item" >
-                                   <a onClick={()=>this.QSetView({page:ORGLOGIN})} className="nav-link "  href="#">Organization Login</a>
-                                 </li>
-
-                                 <li className="nav-item" >
+                                 {this.state.organizationStatus.logged && (
+                                  <li className="nav-item" >
                                    <a onClick={()=>this.QSetView({page:ADDEVENT})} className="nav-link "  href="#">Add event</a>
-                                 </li>
+                                  </li>
+                                  )}
+
+                                 {!this.state.organizationStatus.logged && !this.state.userStatus.logged && (
+                                 <>
+                                  <li className="nav-item"> 
+                                   <a onClick={()=>this.QSetView({page:SIGNUP})} className="nav-link " href="#">Signup</a>
+                                  </li>
+             
+                                  <li className="nav-item" >
+                                   <a onClick={()=>this.QSetView({page:LOGIN})} className="nav-link "  href="#">Login</a>
+                                  </li>
+
+                                  <li className="nav-item" >
+                                   <a onClick={()=>this.QSetView({page:ORGSIGNUP})} className="nav-link "  href="#">Organization Signup</a>
+                                  </li>
+
+                                  <li className="nav-item" >
+                                   <a onClick={()=>this.QSetView({page:ORGLOGIN})} className="nav-link "  href="#">Organization Login</a>
+                                  </li>
+                                 </>
+                                 )}                 
                                </ul>
                              </div>
                            </div>
