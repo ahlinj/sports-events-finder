@@ -2,6 +2,20 @@ const express = require("express")
 const events = express.Router()
 const db = require("../db/conn.js")
 
+//Gets all the events in the DB 
+events.get('/', async (req,res, next)=>{
+    try{
+        let queryResult=await db.allEvents();
+        res.json(queryResult)
+    }
+    catch(err){
+        console.log(err)
+        res.sendStatus(500)
+        next()
+    }
+})
+
+
 //Inserts a new event in our database id field are complete
 events.post('/', async (req, res) => {
     

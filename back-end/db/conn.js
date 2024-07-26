@@ -64,9 +64,18 @@ const  conn = mysql.createConnection({
           })
         })
       }
-      
-      
 
+
+    dataPool.allEvents=()=>{
+    return new Promise ((resolve, reject)=>{
+        conn.query(`SELECT * FROM Dogodek`, (err,res)=>{
+        if(err){return reject(err)}
+        return resolve(res)
+        })
+    })
+    }
+    
+    
     dataPool.AddEvent=(name,description,location,dateTime,organization)=>{
     return new Promise ((resolve, reject)=>{
         conn.query(`INSERT INTO Dogodek (ime,opis,lokacija,datumCas,o_ID) VALUES (?,?,?,?,?)`, [name,description,location,dateTime,organization], (err,res)=>{
