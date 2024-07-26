@@ -45,7 +45,7 @@ class OrganizationsView extends React.Component
               </thead>
               <tbody>
                 {this.state.organizations.map(org => (
-                  <tr key={org.id}>
+                  <tr>
                     <td>{org.username}</td>
                     <td>{org.ime}</td>
                     <td>{org.naslov}</td>
