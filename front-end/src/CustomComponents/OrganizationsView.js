@@ -33,15 +33,28 @@ class OrganizationsView extends React.Component
       <div className="card" style={{ width: "80%", margin: "20px auto" }}>
         <h2 className="card-header">Organizations</h2>
         <div className="card-body">
-         
-            <ul className="list-group">
-              {this.state.organizations.map(org => (
-                <li key={org.id} className="list-group-item">
-                  {org.username}
-                </li>
-              ))}
-            </ul>       
-          </div>
+           
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.organizations.map(org => (
+                  <tr key={org.id}>
+                    <td>{org.username}</td>
+                    <td>{org.ime}</td>
+                    <td>{org.naslov}</td>
+                    <td>{org.eposta}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+        </div>
       </div>
     )
   }
