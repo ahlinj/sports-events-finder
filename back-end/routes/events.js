@@ -14,7 +14,14 @@ events.post('/', async (req, res) => {
     {
         try
         {
-         let queryResult=await db.AddEvent(name,description,location,dateTime,organization);
+         let organizationID = await db.GetOrganizationID(organization);
+         if (!organizationID) {
+            console.log("Organization not found!");
+            res.status(404).send("Organization not found");
+            return;
+         }
+
+         let queryResult=await db.AddEvent(name,description,location,dateTime,organizationID);
          if (queryResult.affectedRows) {
             console.log("New event added!!")
           }
