@@ -22,20 +22,20 @@ class App extends React.Component
         super(props);
         this.state={
           currentPage: HOME,
-          userStatus:{logged:false},
-          organizationStatus:{logged:false}
+          userStatus:{logged:false, user:null},
+          organizationStatus:{logged:false,organization:null}
         }
       } 
 
       QSetView=(obj)=>{
         this.setState({
-          CurrentPage: obj.page
+          currentPage: obj.page
         })
       }
 
       QGetView=(state)=>
         {
-          let page = state.CurrentPage
+          let page = state.currentPage
        
            switch(page)
            {  
@@ -58,7 +58,7 @@ class App extends React.Component
              case ORGLOGIN:
                return <OrganizationLoginView QUserFromChild={this.QSetOrganization}/>
              case ADDEVENT:
-               return <AddEventView/>
+               return <AddEventView organization={this.state.organizationStatus.organization}/>
            }
         }
        

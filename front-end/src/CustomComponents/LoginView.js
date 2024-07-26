@@ -8,7 +8,8 @@ class LoginView extends React.Component
         super(props)
         this.state={
             user:{
-                type:"login"
+                username: '',
+                password: '',
             }
         }
     }

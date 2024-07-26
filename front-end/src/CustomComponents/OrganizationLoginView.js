@@ -8,7 +8,8 @@ class OrganizationLoginView extends React.Component
         super(props)
         this.state={
             organization:{
-                type:"organization-login"
+                username: '',
+                password: '',
             }
         }
     }

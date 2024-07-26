@@ -9,7 +9,10 @@ class AddEventView extends React.Component
         super(props)
         this.state={
             event:{
-                type:"addevent",
+                name: '',
+                description: '',
+                location: '',
+                dateTime: '',
             }
         }
     }
@@ -27,7 +30,7 @@ class AddEventView extends React.Component
           description:this.state.event.description,
           location:this.state.event.location,
           dateTime:this.state.event.dateTime,
-          organization:this.state.event.organization
+          organization:this.props.organization
         })
         .then(response=>{
           console.log("Sent to server...")
@@ -59,11 +62,6 @@ class AddEventView extends React.Component
     <label className="form-label">Date and time</label>
     <input onChange={(e)=>this.QGetTextFromField(e)} name="dateTime" type="datetime-local" className="form-control" id="exampleInputEmail1"/>
   </div>
-  <div className="mb-3">
-    <label className="form-label">Organization</label>
-    <input onChange={(e)=>this.QGetTextFromField(e)} name="organization" type="text" className="form-control" id="exampleInputEmail1"/>
-  </div>
-
 </form>
 <button onClick={()=>this.QPostSignup()} style={{margin:"10px"}}  className="btn btn-primary bt">Submit</button>
 </div>
