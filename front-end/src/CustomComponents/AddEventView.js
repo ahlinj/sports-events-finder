@@ -57,7 +57,7 @@ class AddEventView extends React.Component
   </div>
   <div className="mb-3">
     <label className="form-label">Date and time</label>
-    <input onChange={(e)=>this.QGetTextFromField(e)} name="dateTime" type="text" className="form-control" id="exampleInputEmail1"/>
+    <input onChange={(e)=>this.QGetTextFromField(e)} name="dateTime" type="datetime-local" className="form-control" id="exampleInputEmail1"/>
   </div>
   <div className="mb-3">
     <label className="form-label">Organization</label>
