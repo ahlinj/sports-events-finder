@@ -12,6 +12,20 @@ organizations.use(session({
     }
 }))
 
+//Gets all the orgs in the DB 
+organizations.get('/', async (req,res, next)=>{
+    try{
+        let queryResult=await db.allOrganizations();
+        res.json(queryResult)
+    }
+    catch(err){
+        console.log(err)
+        res.sendStatus(500)
+        next()
+    }
+})
+
+
 organizations.get('/login', (req,res) => {
     if(req.session.organization){
         res.send({
