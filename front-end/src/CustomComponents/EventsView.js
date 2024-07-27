@@ -18,8 +18,7 @@ class EventsView extends React.Component
     axios.get(API_URL+'/events')
       .then(res => {
         this.setState({
-          events: res.data
-        });
+          events: res.data})
       })
       .catch(error => {
         console.error(error)
@@ -51,7 +50,7 @@ class EventsView extends React.Component
                     <td>{evt.opis}</td>
                     <td>{evt.lokacija}</td>
                     <td>{formatDateTime(evt.datumCas)}</td>
-                    <td>{evt.o_ID}</td>
+                    <td>{evt.orgIme}</td>
                   </tr>
                 ))}
               </tbody>
