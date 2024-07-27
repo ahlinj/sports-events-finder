@@ -37,15 +37,14 @@ const  conn = mysql.createConnection({
           
       }
 
-      dataPool.GetOrganizationID=(username)=>{
-        return new Promise ((resolve, reject)=>{
-          conn.query('SELECT id FROM Organizacija WHERE username = ?', username, (err,res, fields)=>{
-            if(err){return reject(err)}
-            return resolve(res[0].id)
-          })
-        })  
-          
-      }
+    dataPool.GetOrganizationID=(username)=>{
+    return new Promise ((resolve, reject)=>{
+        conn.query('SELECT id FROM Organizacija WHERE username = ?', username, (err,res, fields)=>{
+        if(err){return reject(err)}
+        return resolve(res[0].id)
+        })
+    })  
+    }
 
     dataPool.AddOrganization=(username,name,password,address,email)=>{
     return new Promise ((resolve, reject)=>{
@@ -68,7 +67,7 @@ const  conn = mysql.createConnection({
 
     dataPool.allEvents=()=>{
     return new Promise ((resolve, reject)=>{
-        conn.query(`SELECT * FROM Dogodek`, (err,res)=>{
+        conn.query(`SELECT Dogodek.*, Organizacija.ime AS orgIme FROM Dogodek JOIN Organizacija ON Dogodek.o_ID = Organizacija.id`, (err,res)=>{
         if(err){return reject(err)}
         return resolve(res)
         })
