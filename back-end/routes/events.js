@@ -7,6 +7,7 @@ events.get('/', async (req,res, next)=>{
     try{
         let queryResult=await db.allEvents();
         res.json(queryResult)
+        console.log(queryResult)
     }
     catch(err){
         console.log(err)

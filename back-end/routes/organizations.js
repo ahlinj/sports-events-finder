@@ -25,7 +25,6 @@ organizations.get('/', async (req,res, next)=>{
     }
 })
 
-
 organizations.get('/login', (req,res) => {
     if(req.session.organization){
         res.send({
