@@ -11,6 +11,7 @@ import OrganizationsView from "./CustomComponents/OrganizationsView";
 import OrganizationSignUpView from "./CustomComponents/OrganizationSignUpView";
 import OrganizationLoginView from "./CustomComponents/OrganizationLoginView";
 import AddEventView from "./CustomComponents/AddEventView.js";
+import NotLoggedInView from "./CustomComponents/NotLoggedInView.js";
 
 
 
@@ -40,19 +41,19 @@ class App extends React.Component
            switch(page)
            {  
              case HOME:
-               return state.userStatus.logged ? <HomeView/> : "You are not logged in"
+               return <HomeView/>
              case ABOUT:
                return <AboutView/>
              case SIGNUP:
-               return state.organizationStatus.logged ? "You are logged as an organiziation" : <SignupView/>
+               return <SignupView/>
              case LOGIN:
                return <LoginView QUserFromChild={this.QSetUser}/>
              case EVENTS:
-               return <EventsView/>
+               return (state.organizationStatus.logged || state.userStatus.logged) ? <EventsView/> : <NotLoggedInView/>
              case PRIZES:
-               return <PrizesView/>
+               return (state.organizationStatus.logged || state.userStatus.logged) ? <PrizesView/> : <NotLoggedInView/>
              case ORGS:
-               return <OrganizationsView/>
+               return (state.organizationStatus.logged || state.userStatus.logged) ? <OrganizationsView/> : <NotLoggedInView/>
              case ORGSIGNUP:
                return <OrganizationSignUpView/>
              case ORGLOGIN:
