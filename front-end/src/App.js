@@ -49,11 +49,11 @@ class App extends React.Component
              case LOGIN:
                return <LoginView QUserFromChild={this.QSetUser}/>
              case EVENTS:
-               return (state.organizationStatus.logged || state.userStatus.logged) ? <EventsView/> : <NotLoggedInView/>
+               return (state.organizationStatus.logged || state.userStatus.logged) ? <EventsView/> : <NotLoggedInView setView={this.QSetView}/>
              case PRIZES:
-               return (state.organizationStatus.logged || state.userStatus.logged) ? <PrizesView/> : <NotLoggedInView/>
+               return (state.organizationStatus.logged || state.userStatus.logged) ? <PrizesView/> : <NotLoggedInView setView={this.QSetView}/>
              case ORGS:
-               return (state.organizationStatus.logged || state.userStatus.logged) ? <OrganizationsView/> : <NotLoggedInView/>
+               return (state.organizationStatus.logged || state.userStatus.logged) ? <OrganizationsView/> : <NotLoggedInView setView={this.QSetView}/>
              case ORGSIGNUP:
                return <OrganizationSignUpView/>
              case ORGLOGIN:
