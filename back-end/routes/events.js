@@ -16,6 +16,24 @@ events.get('/', async (req,res, next)=>{
     }
 })
 
+//Join event
+events.post('/join', async (req, res) => {
+    let username = req.body.username
+    let d_ID = req.body.d_ID
+    try
+        {
+        let u_ID = await db.GetUserID(username)
+    
+         let queryResult=await db.JoinEvent(u_ID,d_ID)
+         if (queryResult.affectedRows) {
+            console.log("User has joined an event!!")
+          }
+        }
+        catch(err){
+            console.log("Error:"+err)
+            res.sendStatus(500)
+        }   
+})
 
 //Inserts a new event in our database id field are complete
 events.post('/', async (req, res) => {
@@ -31,12 +49,12 @@ events.post('/', async (req, res) => {
         {
          let organizationID = await db.GetOrganizationID(organization);
          if (!organizationID) {
-            console.log("Organization not found!");
-            res.status(404).send("Organization not found");
+            console.log("Organization not found!")
+            res.status(404).send("Organization not found")
             return;
          }
 
-         let queryResult=await db.AddEvent(name,description,location,dateTime,organizationID);
+         let queryResult=await db.AddEvent(name,description,location,dateTime,organizationID)
          if (queryResult.affectedRows) {
             console.log("New event added!!")
           }
@@ -55,6 +73,6 @@ events.post('/', async (req, res) => {
     res.end();
 
     
-});
+})
 
 module.exports=events
