@@ -101,6 +101,15 @@ const  conn = mysql.createConnection({
             })
         })
     }
+    
+    dataPool.UniqueUsersInEvent=(u_ID,d_ID)=>{
+        return new Promise ((resolve, reject)=>{
+            conn.query(`SELECT d_ID, COUNT(DISTINCT u_ID) AS uniqueUser FROM Uporabnik_Dogodek GROUP BY d_ID`, (err,res)=>{
+            if(err){return reject(err)}
+            return resolve(res)
+            })
+        })
+    }
 
 
  conn.connect((err) => {
