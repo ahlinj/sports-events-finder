@@ -12,7 +12,7 @@ class EventsView extends React.Component
     };
   }
   componentDidMount() {
-    this.fetchEvents();
+    this.fetchEvents()
   }
 
   fetchEvents = () => {
@@ -35,6 +35,7 @@ class EventsView extends React.Component
     })
     .then(response=>{
       console.log("Sent to server...")
+      this.fetchEvents()
     })
     .catch(err=>{
       console.log(err)
