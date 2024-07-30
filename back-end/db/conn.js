@@ -27,6 +27,15 @@ const  conn = mysql.createConnection({
       })
     }
 
+    dataPool.GetUserID=(username)=>{
+        return new Promise ((resolve, reject)=>{
+            conn.query('SELECT id FROM Uporabnik WHERE username = ?', username, (err,res, fields)=>{
+            if(err){return reject(err)}
+            return resolve(res[0].id)
+            })
+        })  
+        }
+
     dataPool.AuthOrganization=(username)=>{
         return new Promise ((resolve, reject)=>{
           conn.query('SELECT * FROM Organizacija WHERE username = ?', username, (err,res, fields)=>{
@@ -83,6 +92,15 @@ const  conn = mysql.createConnection({
         })
     })
     } 
+
+    dataPool.JoinEvent=(u_ID,d_ID)=>{
+        return new Promise ((resolve, reject)=>{
+            conn.query(`INSERT INTO Uporabnik_Dogodek (u_ID,d_ID) VALUES (?,?)`, [u_ID,d_ID], (err,res)=>{
+            if(err){return reject(err)}
+            return resolve(res)
+            })
+        })
+    }
 
 
  conn.connect((err) => {
