@@ -25,6 +25,19 @@ class EventsView extends React.Component
       })
   }
 
+  handleJoin = (eventId) => {
+    axios.post(API_URL+'/events/join',{
+      username: this.props.username,
+      d_ID: eventId
+    })
+    .then(response=>{
+      console.log("Sent to server...")
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  }
+
 
   render()
   {
@@ -51,6 +64,14 @@ class EventsView extends React.Component
                     <td>{evt.lokacija}</td>
                     <td>{formatDateTime(evt.datumCas)}</td>
                     <td>{evt.orgIme}</td>
+                    <td>
+                    <button
+                      onClick={() => this.handleJoin(evt.id)}
+                      className="btn btn-primary"
+                    >
+                      Join
+                    </button>
+                  </td>
                   </tr>
                 ))}
               </tbody>
