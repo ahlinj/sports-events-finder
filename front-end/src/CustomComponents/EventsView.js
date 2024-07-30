@@ -7,7 +7,8 @@ class EventsView extends React.Component
   constructor(props) {
     super(props)
     this.state = {
-      events: []
+      events: [],
+      uniqueUsers: []
     };
   }
   componentDidMount() {
@@ -18,7 +19,9 @@ class EventsView extends React.Component
     axios.get(API_URL+'/events')
       .then(res => {
         this.setState({
-          events: res.data})
+          events: res.data.events,
+          uniqueUsers: res.data.uniqueUsers
+        })
       })
       .catch(error => {
         console.error(error)
@@ -54,27 +57,32 @@ class EventsView extends React.Component
                   <th>Location</th>
                   <th>Date & Time</th>
                   <th>Organizer</th>
+                  <th>Participants</th>
                 </tr>
               </thead>
               <tbody>
-                {this.state.events.map(evt => (
-                  <tr>
+              {this.state.events.map(evt => {
+                let unique = this.state.uniqueUsers.find(user => user.d_ID === evt.id);
+                return (
+                  <tr key={evt.id}>
                     <td>{evt.ime}</td>
                     <td>{evt.opis}</td>
                     <td>{evt.lokacija}</td>
                     <td>{formatDateTime(evt.datumCas)}</td>
                     <td>{evt.orgIme}</td>
+                    <td>{unique ? unique.uniqueUser : "0"}</td>
                     <td>
-                    <button
-                      onClick={() => this.handleJoin(evt.id)}
-                      className="btn btn-primary"
-                    >
-                      Join
-                    </button>
-                  </td>
+                      <button
+                        onClick={() => this.handleJoin(evt.id)}
+                        className="btn btn-primary"
+                      >
+                        Join
+                      </button>
+                    </td>
                   </tr>
-                ))}
-              </tbody>
+                );
+              })}
+            </tbody>
             </table>
         </div>
       </div>
