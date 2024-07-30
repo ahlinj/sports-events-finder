@@ -32,6 +32,7 @@ events.post('/join', async (req, res) => {
          let queryResult=await db.JoinEvent(u_ID,d_ID)
          if (queryResult.affectedRows) {
             console.log("User has joined an event!!")
+            res.sendStatus(200)
           }
         }
         catch(err){
