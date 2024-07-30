@@ -114,24 +114,35 @@ class App extends React.Component
                                   )}
 
                                  {!this.state.organizationStatus.logged && !this.state.userStatus.logged && (
-                                 <>
-                                  <li className="nav-item"> 
-                                   <a onClick={()=>this.QSetView({page:SIGNUP})} className="nav-link " href="#">User Signup</a>
+  <>
+                                  <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                      User
+                                    </a>
+                                    <ul className="dropdown-menu" aria-labelledby="userDropdown">
+                                      <li>
+                                        <a onClick={() => this.QSetView({ page: SIGNUP })} className="dropdown-item" href="#">User Signup</a>
+                                      </li>
+                                      <li>
+                                        <a onClick={() => this.QSetView({ page: LOGIN })} className="dropdown-item" href="#">User Login</a>
+                                      </li>
+                                    </ul>
                                   </li>
-             
-                                  <li className="nav-item" >
-                                   <a onClick={()=>this.QSetView({page:LOGIN})} className="nav-link "  href="#"> User Login</a>
+                                  <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle" href="#" id="organizationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                      Organization
+                                    </a>
+                                    <ul className="dropdown-menu" aria-labelledby="organizationDropdown">
+                                      <li>
+                                        <a onClick={() => this.QSetView({ page: ORGSIGNUP })} className="dropdown-item" href="#">Organization Signup</a>
+                                      </li>
+                                      <li>
+                                        <a onClick={() => this.QSetView({ page: ORGLOGIN })} className="dropdown-item" href="#">Organization Login</a>
+                                      </li>
+                                    </ul>
                                   </li>
-
-                                  <li className="nav-item" >
-                                   <a onClick={()=>this.QSetView({page:ORGSIGNUP})} className="nav-link "  href="#">Organization Signup</a>
-                                  </li>
-
-                                  <li className="nav-item" >
-                                   <a onClick={()=>this.QSetView({page:ORGLOGIN})} className="nav-link "  href="#">Organization Login</a>
-                                  </li>
-                                 </>
-                                 )}                 
+                                </>
+                              )}               
                                </ul>
                              </div>
                            </div>
