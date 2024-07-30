@@ -5,9 +5,14 @@ const db = require("../db/conn.js")
 //Gets all the events in the DB 
 events.get('/', async (req,res, next)=>{
     try{
-        let queryResult=await db.allEvents();
-        res.json(queryResult)
+        let queryResult=await db.allEvents()
+        let queryResult2=await db.UniqueUsersInEvent()
+        res.json({
+            events:queryResult,
+            uniqueUsers:queryResult2
+        })
         console.log(queryResult)
+        console.log(queryResult2)
     }
     catch(err){
         console.log(err)
