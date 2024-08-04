@@ -64,7 +64,7 @@ const  conn = mysql.createConnection({
     })  
     }
 
-    dataPool.GetUser=(username)=>{
+    dataPool.GetOrganization=(username)=>{
       return new Promise ((resolve, reject)=>{
         conn.query('SELECT * FROM Organizacija WHERE username = ?', username, (err,res, fields)=>{
         if(err){return reject(err)}

@@ -16,7 +16,7 @@ organizations.post('/get', async (req,res) => {
     let org = req.body.name
     if(org){
         try {
-            let queryResult = await db.GetUser(org)
+            let queryResult = await db.GetOrganization(org)
             res.json(queryResult)
             console.log("Organization sent!!")
           } catch (error) {
