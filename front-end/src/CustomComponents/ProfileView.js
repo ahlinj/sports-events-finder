@@ -29,9 +29,6 @@ class ProfileView extends React.Component
           })
       }
 
-    
-
-
     render()
     {
       return(
@@ -60,7 +57,7 @@ class ProfileView extends React.Component
         <div className="card" style={{margin:"10px"}}>
           <h6 className="card-header">Private</h6>
           <p style={{margin:"10px"}}>
-          {this.state.userData.privat}
+          {this.state.userData.privat == 1 ? "Yes" : "No"}
           </p>
         </div>
         <div className="card" style={{margin:"10px"}}>
