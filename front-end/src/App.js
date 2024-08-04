@@ -13,7 +13,7 @@ import OrganizationLoginView from "./CustomComponents/OrganizationLoginView";
 import AddEventView from "./CustomComponents/AddEventView.js";
 import NotLoggedInView from "./CustomComponents/NotLoggedInView.js";
 import ProfileView from "./CustomComponents/ProfileView.js"
-import ProfileVIewOrg from "./CustomComponents/ProfileViewOrg.js";
+import ProfileViewOrg from "./CustomComponents/ProfileViewOrg.js";
 
 
 
@@ -63,9 +63,9 @@ class App extends React.Component
              case ADDEVENT:
                return <AddEventView organization={this.state.organizationStatus.organization}/>
              case PROFILE:
-               return <ProfileView/>
+               return <ProfileView user={this.state.userStatus.user}/>
              case ORGPROFILE:
-               return <ProfileVIewOrg/>
+               return <ProfileViewOrg/>
            }
         }
        
@@ -133,7 +133,7 @@ class App extends React.Component
                                   )}
 
                                  {!this.state.organizationStatus.logged && !this.state.userStatus.logged && (
-  <>
+                                    <>
                                   <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                       User
