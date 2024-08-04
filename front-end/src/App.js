@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { ABOUT, ADDEVENT ,EVENTS, HOME, LOGIN, ORGLOGIN, ORGSIGNUP, ORGS, SIGNUP, PRIZES } from "./Utils/Constants.js"
+import { ABOUT, ADDEVENT ,EVENTS, HOME, LOGIN, ORGLOGIN, ORGSIGNUP, ORGS, SIGNUP, PRIZES, PROFILE, ORGPROFILE } from "./Utils/Constants.js"
 import HomeView from "./CustomComponents/HomeView";
 import AboutView from "./CustomComponents/AboutView";
 import LoginView from "./CustomComponents/LoginView";
@@ -12,6 +12,8 @@ import OrganizationSignUpView from "./CustomComponents/OrganizationSignUpView";
 import OrganizationLoginView from "./CustomComponents/OrganizationLoginView";
 import AddEventView from "./CustomComponents/AddEventView.js";
 import NotLoggedInView from "./CustomComponents/NotLoggedInView.js";
+import ProfileView from "./CustomComponents/ProfileView.js"
+import ProfileVIewOrg from "./CustomComponents/ProfileViewOrg.js";
 
 
 
@@ -60,6 +62,10 @@ class App extends React.Component
                return <OrganizationLoginView QUserFromChild={this.QSetOrganization}/>
              case ADDEVENT:
                return <AddEventView organization={this.state.organizationStatus.organization}/>
+             case PROFILE:
+               return <ProfileView/>
+             case ORGPROFILE:
+               return <ProfileVIewOrg/>
            }
         }
        
@@ -109,8 +115,20 @@ class App extends React.Component
                                  </li>
 
                                  {this.state.organizationStatus.logged && (
+                                  <>
                                   <li className="nav-item" >
                                    <a onClick={()=>this.QSetView({page:ADDEVENT})} className="nav-link "  href="#">Add event</a>
+                                  </li>
+
+                                  <li className="nav-item" >
+                                  <a onClick={()=>this.QSetView({page:ORGPROFILE})} className="nav-link "  href="#">Profile</a>
+                                  </li>
+                                  </>
+                                  )}
+
+                                 {this.state.userStatus.logged && (
+                                  <li className="nav-item" >
+                                   <a onClick={()=>this.QSetView({page:PROFILE})} className="nav-link "  href="#">Profile</a>
                                   </li>
                                   )}
 
