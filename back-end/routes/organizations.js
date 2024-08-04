@@ -12,6 +12,20 @@ organizations.use(session({
     }
 }))
 
+organizations.post('/get', async (req,res) => {
+    let org = req.body.name
+    if(org){
+        try {
+            let queryResult = await db.GetUser(org)
+            res.json(queryResult)
+            console.log("Organization sent!!")
+          } catch (error) {
+            console.error(error)
+            res.sendStatus(500)
+          }
+    }
+})
+
 //Gets all the orgs in the DB 
 organizations.get('/', async (req,res, next)=>{
     try{
