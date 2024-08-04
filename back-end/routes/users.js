@@ -12,6 +12,20 @@ users.use(session({
     }
 }))
 
+users.post('/get', async (req,res) => {
+    let user = req.body.name
+    if(user){
+        try {
+            let queryResult = await db.GetUser(user)
+            res.json(queryResult)
+            console.log("User sent!!")
+          } catch (error) {
+            console.error(error)
+            res.sendStatus(500)
+          }
+    }
+})
+
 users.get('/login', (req,res) => {
     if(req.session.user){
         res.send({
