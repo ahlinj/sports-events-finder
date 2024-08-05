@@ -42,6 +42,25 @@ events.post('/join', async (req, res) => {
         }   
 })
 
+events.post('/check', async (req, res) => {
+    let username = req.body.username
+    try
+        {
+        let u_ID = await db.GetUserID(username)
+    
+         let queryResult=await db.CheckJoinedEvents(u_ID)
+         res.json(queryResult)
+         console.log("Sent!!")
+         console.log(queryResult)
+          
+        }
+        catch(err){
+            console.log("Error:"+err)
+            res.sendStatus(500)
+        }   
+})
+
+
 //Inserts a new event in our database id field are complete
 events.post('/', async (req, res) => {
     

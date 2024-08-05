@@ -129,6 +129,15 @@ const  conn = mysql.createConnection({
         })
     }
 
+    dataPool.CheckJoinedEvents=(u_ID)=>{
+      return new Promise ((resolve, reject)=>{
+        conn.query(`SELECT DISTINCT d_ID FROM Uporabnik_Dogodek WHERE u_ID = ?`, u_ID, (err,res)=>{
+        if(err){return reject(err)}
+        return resolve(res)
+        })
+    })
+    }
+
     dataPool.AddToken=(u_ID,d_ID)=>{
       return new Promise ((resolve, reject)=>{
           conn.query(`INSERT INTO Zeton (vrednost,datumPrejetja,d_ID,u_ID) VALUES (?,?,?,?)`, [Math.floor(Math.random() * 100) + 1,convertDateTime(Date.now()),d_ID,u_ID], (err,res)=>{
