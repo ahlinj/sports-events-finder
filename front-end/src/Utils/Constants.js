@@ -10,6 +10,7 @@ export const PRIZES = 'prizes'
 export const SIGNUP = 'signup'
 export const PROFILE = 'profile'
 export const ORGPROFILE = 'orgprofile'
+export const TOKENS = 'tokens'
 
 
 

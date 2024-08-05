@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { ABOUT, ADDEVENT ,EVENTS, HOME, LOGIN, ORGLOGIN, ORGSIGNUP, ORGS, SIGNUP, PRIZES, PROFILE, ORGPROFILE } from "./Utils/Constants.js"
+import { ABOUT, ADDEVENT ,EVENTS, HOME, LOGIN, ORGLOGIN, ORGSIGNUP, ORGS, SIGNUP, PRIZES, PROFILE, ORGPROFILE, TOKENS } from "./Utils/Constants.js"
 import HomeView from "./CustomComponents/HomeView";
 import AboutView from "./CustomComponents/AboutView";
 import LoginView from "./CustomComponents/LoginView";
@@ -14,6 +14,7 @@ import AddEventView from "./CustomComponents/AddEventView.js";
 import NotLoggedInView from "./CustomComponents/NotLoggedInView.js";
 import ProfileView from "./CustomComponents/ProfileView.js"
 import ProfileViewOrg from "./CustomComponents/ProfileViewOrg.js";
+import TokensView from "./CustomComponents/TokensView.js";
 
 
 
@@ -66,6 +67,8 @@ class App extends React.Component
                return <ProfileView user={this.state.userStatus.user}/>
              case ORGPROFILE:
                return <ProfileViewOrg organization={this.state.organizationStatus.organization}/>
+             case TOKENS:
+               return <TokensView/>
            }
         }
        
@@ -127,9 +130,14 @@ class App extends React.Component
                                   )}
 
                                  {this.state.userStatus.logged && (
+                                  <>
                                   <li className="nav-item" >
                                    <a onClick={()=>this.QSetView({page:PROFILE})} className="nav-link "  href="#">Profile</a>
                                   </li>
+                                  <li className="nav-item" >
+                                   <a onClick={()=>this.QSetView({page:TOKENS})} className="nav-link "  href="#">Tokens</a>
+                                  </li>
+                                  </>
                                   )}
 
                                  {!this.state.organizationStatus.logged && !this.state.userStatus.logged && (
