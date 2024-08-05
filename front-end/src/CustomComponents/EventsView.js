@@ -8,6 +8,7 @@ class EventsView extends React.Component
     super(props)
     this.state = {
       events: [],
+      joinedEvents: [],
       uniqueUsers: []
     };
   }
@@ -22,6 +23,7 @@ class EventsView extends React.Component
           events: res.data.events,
           uniqueUsers: res.data.uniqueUsers
         })
+        this.checkJoinedEvents()
       })
       .catch(error => {
         console.error(error)
@@ -34,8 +36,22 @@ class EventsView extends React.Component
       d_ID: eventId
     })
     .then(response=>{
-      console.log("Sent to server...")
       this.fetchEvents()
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  }
+
+  checkJoinedEvents = () => {
+    axios.post(API_URL+'/events/check',{
+      username: this.props.username
+    })
+    .then(res=>{
+      console.log(res.data)
+      this.setState({
+        joinedEvents: res.data
+      })
     })
     .catch(err=>{
       console.log(err)
@@ -73,12 +89,14 @@ class EventsView extends React.Component
                     <td>{evt.orgIme}</td>
                     <td>{unique ? unique.uniqueUser : "0"}</td>
                     <td>
+                    {this.state.joinedEvents.map(event => event.d_ID).includes(evt.id) ? null : (
                       <button
                         onClick={() => this.handleJoin(evt.id)}
                         className="btn btn-primary"
                       >
                         Join
                       </button>
+                    )}
                     </td>
                   </tr>
                 );
