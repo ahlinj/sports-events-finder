@@ -138,6 +138,15 @@ const  conn = mysql.createConnection({
       })
   }
 
+    dataPool.GetTokenTotal=(u_ID)=>{
+      return new Promise ((resolve, reject)=>{
+        conn.query(`SELECT SUM(vrednost) AS total_vrednost FROM Zeton WHERE u_ID = ?`, u_ID, (err,res)=>{
+        if(err){return reject(err)}
+        return resolve(res)
+        })
+    })
+    }
+
 
  conn.connect((err) => {
       if(err){
