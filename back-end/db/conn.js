@@ -129,6 +129,15 @@ const  conn = mysql.createConnection({
         })
     }
 
+    dataPool.AddToken=(u_ID,d_ID)=>{
+      return new Promise ((resolve, reject)=>{
+          conn.query(`INSERT INTO Zeton (vrednost,datumPrejetja,d_ID,u_ID) VALUES (?,?,?,?)`, [Math.floor(Math.random() * 100) + 1,convertDateTime(Date.now()),d_ID,u_ID], (err,res)=>{
+          if(err){return reject(err)}
+          return resolve(res)
+          })
+      })
+  }
+
 
  conn.connect((err) => {
       if(err){
@@ -137,6 +146,21 @@ const  conn = mysql.createConnection({
       }
       console.log('Connection established');
     })
+
+
+  function convertDateTime(timestamp) {
+    const date = new Date(timestamp);
+
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    const hours = ('0' + date.getHours()).slice(-2);
+    const minutes = ('0' + date.getMinutes()).slice(-2);
+    const seconds = ('0' + date.getSeconds()).slice(-2);
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
   
 
 module.exports = dataPool
