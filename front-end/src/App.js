@@ -68,7 +68,7 @@ class App extends React.Component
              case ORGPROFILE:
                return <ProfileViewOrg organization={this.state.organizationStatus.organization}/>
              case TOKENS:
-               return <TokensView/>
+               return <TokensView user={this.state.userStatus.user}/>
            }
         }
        
