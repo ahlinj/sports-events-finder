@@ -9,6 +9,7 @@ const port = 5000
 const users = require("./routes/users.js")
 const organizations = require("./routes/organizations.js")
 const events = require("./routes/events.js")
+const tokens = require("./routes/tokens.js")
 
 
 app.use(cookieParser("somesecrets"))
@@ -29,6 +30,7 @@ res.send("hola")
 app.use("/users",users)
 app.use("/organizations",organizations)
 app.use("/events",events)
+app.use("/tokens",tokens)
 
 ///App listening on port
 app.listen(process.env.PORT || port, ()=>{
