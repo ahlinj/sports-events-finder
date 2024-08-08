@@ -20,6 +20,23 @@ tokens.post('/', async (req,res) => {
     }
 })
 
+tokens.post('/all', async (req,res) => {
+    let user = req.body.name
+
+    if(user){
+        try {
+            let u_ID = await db.GetUserID(user)
+
+            let queryResult = await db.allTokensByUser(u_ID)
+            res.json(queryResult)
+            console.log("All tokens sent!!")
+          } catch (error) {
+            console.error(error)
+            res.sendStatus(500)
+          }
+    }
+})
+
 
 
 

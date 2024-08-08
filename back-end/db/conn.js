@@ -156,6 +156,15 @@ const  conn = mysql.createConnection({
     })
     }
 
+    dataPool.allTokensByUser=(u_ID)=>{
+      return new Promise ((resolve, reject)=>{
+          conn.query(`SELECT Zeton.*, Dogodek.ime AS dogodekIme FROM Zeton JOIN Dogodek ON Zeton.d_ID = Dogodek.id WHERE Zeton.u_ID = ?`, u_ID ,(err,res)=>{
+          if(err){return reject(err)}
+          return resolve(res)
+          })
+      })
+      }
+
 
  conn.connect((err) => {
       if(err){
