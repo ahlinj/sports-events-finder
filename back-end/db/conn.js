@@ -165,6 +165,15 @@ const  conn = mysql.createConnection({
       })
       }
 
+      dataPool.allTokensAllUsers=()=>{
+        return new Promise ((resolve, reject)=>{
+            conn.query(`SELECT Zeton.*, Uporabnik.username, SUM(Zeton.vrednost) AS total_vrednost FROM Zeton JOIN Uporabnik ON Zeton.u_ID = Uporabnik.id GROUP BY Zeton.u_ID ORDER BY total_vrednost DESC` ,(err,res)=>{
+            if(err){return reject(err)}
+            return resolve(res)
+            })
+        })
+        }
+
 
  conn.connect((err) => {
       if(err){
