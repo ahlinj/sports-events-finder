@@ -10,6 +10,7 @@ const users = require("./routes/users.js")
 const organizations = require("./routes/organizations.js")
 const events = require("./routes/events.js")
 const tokens = require("./routes/tokens.js")
+const prizes = require("./routes/prizes.js")
 
 
 app.use(cookieParser("somesecrets"))
@@ -31,6 +32,7 @@ app.use("/users",users)
 app.use("/organizations",organizations)
 app.use("/events",events)
 app.use("/tokens",tokens)
+app.use("/prizes",prizes)
 
 ///App listening on port
 app.listen(process.env.PORT || port, ()=>{
