@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { ABOUT, ADDEVENT ,EVENTS, HOME, LOGIN, ORGLOGIN, ORGSIGNUP, ORGS, SIGNUP, PRIZES, PROFILE, ORGPROFILE, TOKENS } from "./Utils/Constants.js"
+import { ABOUT, ADDEVENT ,EVENTS, HOME, LOGIN, ORGLOGIN, ORGSIGNUP, ORGS, SIGNUP, PRIZES, PROFILE, ORGPROFILE, TOKENS, ADDPRIZE } from "./Utils/Constants.js"
 import HomeView from "./CustomComponents/HomeView";
 import AboutView from "./CustomComponents/AboutView";
 import LoginView from "./CustomComponents/LoginView";
@@ -15,6 +15,7 @@ import NotLoggedInView from "./CustomComponents/NotLoggedInView.js";
 import ProfileView from "./CustomComponents/ProfileView.js"
 import ProfileViewOrg from "./CustomComponents/ProfileViewOrg.js";
 import TokensView from "./CustomComponents/TokensView.js";
+import AddPrizeView from "./CustomComponents/AddPrizeView.js";
 
 
 
@@ -69,6 +70,8 @@ class App extends React.Component
                return <ProfileViewOrg organization={this.state.organizationStatus.organization}/>
              case TOKENS:
                return <TokensView user={this.state.userStatus.user}/>
+             case ADDPRIZE:
+               return <AddPrizeView/>
            }
         }
        
@@ -122,7 +125,9 @@ class App extends React.Component
                                   <li className="nav-item" >
                                    <a onClick={()=>this.QSetView({page:ADDEVENT})} className="nav-link "  href="#">Add event</a>
                                   </li>
-
+                                  <li className="nav-item" >
+                                  <a onClick={()=>this.QSetView({page:ADDPRIZE})} className="nav-link "  href="#">Add Prize</a>
+                                  </li>
                                   <li className="nav-item" >
                                   <a onClick={()=>this.QSetView({page:ORGPROFILE})} className="nav-link "  href="#">Profile</a>
                                   </li>
