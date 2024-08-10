@@ -71,7 +71,7 @@ class App extends React.Component
              case TOKENS:
                return <TokensView user={this.state.userStatus.user}/>
              case ADDPRIZE:
-               return <AddPrizeView/>
+               return <AddPrizeView organization={this.state.organizationStatus.organization}/>
            }
         }
        
