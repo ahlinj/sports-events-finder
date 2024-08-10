@@ -174,6 +174,15 @@ const  conn = mysql.createConnection({
         })
         }
 
+      dataPool.AddPrize=(value,sponsor)=>{
+      return new Promise ((resolve, reject)=>{
+          conn.query(`INSERT INTO Nagrada (vsota,datumObjave,sponzor) VALUES (?,?,?)`, [value,convertDateTime(Date.now()),sponsor], (err,res)=>{
+          if(err){return reject(err)}
+          return resolve(res)
+          })
+      })
+    }
+
 
  conn.connect((err) => {
       if(err){
