@@ -48,7 +48,13 @@ class PrizesView extends React.Component
     return(
       <>
       <div className="card" style={{ width: "80%", margin: "20px auto" }}>
-        <h2 className="card-header">Current available prizes</h2>
+        <div className="card-body">
+        <h5 className="card-title">How to win a prize?</h5>
+        <p className="card-text">Collect tokens by joining different events. Person with the highest amount of tokens at the end of each month will receive prizes for this month. Competition restarts on the first day of each month.</p>
+        </div>
+      </div>
+      <div className="card" style={{ width: "80%", margin: "20px auto" }}>
+        <h2 className="card-header">Currently available prizes</h2>
         <div className="card-body">
            
             <table className="table">
