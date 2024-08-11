@@ -1,6 +1,17 @@
 const express = require("express")
+const nodeSchedule = require('node-schedule')
 const prizes = express.Router()
 const db = require("../db/conn.js")
+
+const performMonthlyTask = async () => {
+    console.log('Running scheduled task at the beginning of the month')
+    let winner = await db.GetTokenWinner()
+    console.log(winner[0].username)
+    let winnerID = await db.GetUserID(winner[0].username)
+    db.AddPrizeWinner(winnerID)
+  }
+
+nodeSchedule.scheduleJob('0 0 1 * *', performMonthlyTask)
 
 prizes.get('/', async (req,res, next)=>{
     try{

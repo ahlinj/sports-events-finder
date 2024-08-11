@@ -156,6 +156,16 @@ const  conn = mysql.createConnection({
     })
     }
 
+    dataPool.GetTokenWinner=()=>{
+      return new Promise ((resolve, reject)=>{
+        conn.query(`SELECT Uporabnik.username, SUM(Zeton.vrednost) AS total_vrednost FROM Zeton JOIN Uporabnik ON Zeton.u_ID = Uporabnik.id WHERE MONTH(Zeton.datumprejetja) = MONTH(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH)) AND YEAR(Zeton.datumprejetja) = YEAR(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH)) GROUP BY Zeton.u_ID ORDER BY total_vrednost DESC LIMIT 1`, (err,res)=>{
+        if(err){return reject(err)}
+        return resolve(res)
+        })
+    })
+    }
+    
+
     dataPool.allTokensByUser=(u_ID)=>{
       return new Promise ((resolve, reject)=>{
           conn.query(`SELECT Zeton.*, Dogodek.ime AS dogodekIme FROM Zeton JOIN Dogodek ON Zeton.d_ID = Dogodek.id WHERE Zeton.u_ID = ?`, u_ID ,(err,res)=>{
@@ -167,7 +177,7 @@ const  conn = mysql.createConnection({
 
       dataPool.allTokensAllUsers=()=>{
         return new Promise ((resolve, reject)=>{
-            conn.query(`SELECT Zeton.*, Uporabnik.username, SUM(Zeton.vrednost) AS total_vrednost FROM Zeton JOIN Uporabnik ON Zeton.u_ID = Uporabnik.id GROUP BY Zeton.u_ID ORDER BY total_vrednost DESC` ,(err,res)=>{
+            conn.query(`SELECT Zeton.u_ID, Uporabnik.username, SUM(Zeton.vrednost) AS total_vrednost FROM Zeton JOIN Uporabnik ON Zeton.u_ID = Uporabnik.id WHERE MONTH(Zeton.datumprejetja) = MONTH(CURRENT_DATE()) AND YEAR(Zeton.datumprejetja) = YEAR(CURRENT_DATE()) GROUP BY Zeton.u_ID ORDER BY total_vrednost DESC` ,(err,res)=>{
             if(err){return reject(err)}
             return resolve(res)
             })
@@ -176,7 +186,7 @@ const  conn = mysql.createConnection({
 
       dataPool.allPrizesAllUsers=()=>{
         return new Promise ((resolve, reject)=>{
-            conn.query(`SELECT * FROM Nagrada WHERE YEAR(datumObjave) = YEAR(CURDATE()) AND MONTH(datumObjave) = MONTH(CURDATE())` ,(err,res)=>{
+            conn.query(`SELECT * FROM Nagrada WHERE YEAR(datumObjave) = YEAR(CURDATE()) AND MONTH(datumObjave) = MONTH(CURDATE()) AND datumPrejetja IS NULL` ,(err,res)=>{
             if(err){return reject(err)}
             return resolve(res)
             })
@@ -191,6 +201,16 @@ const  conn = mysql.createConnection({
           return resolve(res)
           })
       })
+    }
+
+      dataPool.AddPrizeWinner=(winner)=>{
+        return new Promise ((resolve, reject)=>{
+            conn.query(`UPDATE Nagrada SET datumPrejetja = NOW(), u_ID = ? WHERE datumPrejetja IS NULL`,winner, (err,res)=>{
+            if(err){return reject(err)}
+            return resolve(res)
+            })
+        })
+
     }
 
 
