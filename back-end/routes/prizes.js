@@ -15,6 +15,19 @@ prizes.get('/', async (req,res, next)=>{
     }
 })
 
+prizes.get('/get', async (req,res, next)=>{
+    try{
+        let queryResult=await db.allPrizesAllUsers()
+        res.json(queryResult)
+        console.log(queryResult)
+    }
+    catch(err){
+        console.log(err)
+        res.sendStatus(500)
+        next()
+    }
+})
+
 prizes.post('/add', async (req,res, next)=>{
     let value = req.body.value
     let sponsor = req.body.sponsor
