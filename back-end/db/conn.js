@@ -176,7 +176,7 @@ const  conn = mysql.createConnection({
 
       dataPool.allPrizesAllUsers=()=>{
         return new Promise ((resolve, reject)=>{
-            conn.query(`SELECT Nagrada.* FROM Nagrada` ,(err,res)=>{
+            conn.query(`SELECT * FROM Nagrada WHERE YEAR(datumObjave) = YEAR(CURDATE()) AND MONTH(datumObjave) = MONTH(CURDATE())` ,(err,res)=>{
             if(err){return reject(err)}
             return resolve(res)
             })

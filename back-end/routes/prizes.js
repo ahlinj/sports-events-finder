@@ -15,6 +15,7 @@ prizes.get('/', async (req,res, next)=>{
     }
 })
 
+//retrieves prizes from the current month
 prizes.get('/get', async (req,res, next)=>{
     try{
         let queryResult=await db.allPrizesAllUsers()
