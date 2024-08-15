@@ -107,6 +107,7 @@ class EventsView extends React.Component
                     <td>{evt.orgIme}</td>
                     <td>{unique ? unique.uniqueUser : "0"}</td>
                     <td>
+                    {this.state.joinedEvents.map(event => event.d_ID).includes(evt.id) ? (
                     <select onChange={(e) => this.SendRating(evt.id,e)} name="rating" className="form-control" id="ratingSelect">
                       <option value="0">Select</option>
                       <option value="1">1</option>
@@ -115,9 +116,14 @@ class EventsView extends React.Component
                       <option value="4">4</option>
                       <option value="5">5</option>
                     </select>
+                    ) : (
+                      null
+                    )}
                     </td>
                     <td>
-                    {this.state.joinedEvents.map(event => event.d_ID).includes(evt.id) ? null : (
+                    {this.state.joinedEvents.map(event => event.d_ID).includes(evt.id) ? (
+                      <button className="btn btn-secondary" disabled>Joined</button>
+                      ) : (
                       <button
                         onClick={() => this.handleJoin(evt.id)}
                         className="btn btn-primary"
