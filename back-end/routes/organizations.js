@@ -63,34 +63,48 @@ organizations.post('/login', async (req, res) => {
                 {
                     if(password===queryResult[0].geslo)
                     {
-                    req.session.organization=queryResult[0];
-                    res.json(queryResult[0].username)
-                    console.log(req.session.organization)
-                     console.log(queryResult[0].username)
-                     console.log("SESSION VALID");
-                    
-                     //res.redirect('/');
+                        req.session.user = queryResult[0]
+                        console.log("SESSION VALID")
+                        return res.json({
+                            success: true,
+                            message: 'Login successful',
+                            user: queryResult[0].username
+                        })
                     }
                     else
                     {
-                        console.log("INCORRECT PASSWORD");
+                        console.log("INCORRECT PASSWORD")
+                        return res.status(401).json({
+                            success: false,
+                            message: 'Incorrect password'
+                        })
                     }
                 }else 
                 {
-                 console.log("USER NOT REGISTRED");   
+                    console.log("USER NOT REGISTRED")
+                    return res.status(401).json({
+                        success: false,
+                        message: 'User not registered'
+                    })   
                 }
         }
         catch(err){
             console.log(err)
-            res.sendStatus(500)
+            return res.status(500).json({
+                success: false,
+                message: 'An error occurred. Please try again later.'
+            });
         }    
     }
     else
     {
-        console.log("Please enter Username and Password!")
+        return res.status(400).json({
+            success: false,
+            message: 'Please enter Username and Password'
+        })
     }
-    res.end();
-});
+    res.end()
+})
 
 //Inserts a new organization in our database id field are complete
 organizations.post('/register', async (req, res) => {
@@ -123,6 +137,6 @@ organizations.post('/register', async (req, res) => {
     res.end();
 
     
-});
+})
 
 module.exports=organizations
