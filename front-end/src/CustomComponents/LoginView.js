@@ -31,10 +31,13 @@ class LoginView extends React.Component
           password:user.password
         },{withCredentials:true})
         .then(res=>{
-            console.log("Sent to server...")
-            console.log(res.data)
-            this.QSendUserToParent(res.data)
-        })
+          if (res.data.success) {
+            console.log("Login successful")
+            this.QSendUserToParent(res.data.user)
+        }
+        }).catch(err => {
+          console.log(err.response.data.message)
+      })
       }    
   
 
