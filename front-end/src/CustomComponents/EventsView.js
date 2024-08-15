@@ -117,7 +117,9 @@ class EventsView extends React.Component
                       <option value="5">5</option>
                     </select>
                     ) : (
-                      null
+                      <select disabled>
+                      <option value="0">Select</option>
+                      </select>
                     )}
                     </td>
                     <td>
