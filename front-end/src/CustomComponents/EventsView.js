@@ -10,8 +10,9 @@ class EventsView extends React.Component
       events: [],
       joinedEvents: [],
       uniqueUsers: []
-    };
+    }
   }
+
   componentDidMount() {
     this.fetchEvents()
   }
@@ -58,6 +59,10 @@ class EventsView extends React.Component
     })
   }
 
+  SendRating = (e) => {
+    console.log(e.target.value)
+  }
+
 
   render()
   {
@@ -75,6 +80,7 @@ class EventsView extends React.Component
                   <th>Date & Time</th>
                   <th>Organizer</th>
                   <th>Participants</th>
+                  <th>Rating</th>
                 </tr>
               </thead>
               <tbody>
@@ -88,6 +94,15 @@ class EventsView extends React.Component
                     <td>{formatDateTime(evt.datumCas)}</td>
                     <td>{evt.orgIme}</td>
                     <td>{unique ? unique.uniqueUser : "0"}</td>
+                    <td>
+                    <select onChange={(e) => this.SendRating(e)} name="rating" className="form-control" id="ratingSelect">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                    </td>
                     <td>
                     {this.state.joinedEvents.map(event => event.d_ID).includes(evt.id) ? null : (
                       <button
