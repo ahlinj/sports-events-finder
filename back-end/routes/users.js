@@ -127,6 +127,6 @@ users.post('/register', async (req, res) => {
     res.end();
 
     
-});
+})
 
 module.exports=users
