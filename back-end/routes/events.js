@@ -61,7 +61,7 @@ events.post('/check', async (req, res) => {
 })
 
 
-//Inserts a new event in our database id field are complete
+//Inserts a new event in our database
 events.post('/', async (req, res) => {
     
     let name = req.body.name
@@ -99,6 +99,25 @@ events.post('/', async (req, res) => {
     res.end();
 
     
+})
+
+//Inserts a new rating in our database
+events.post('/rating', async (req, res) => {
+    
+    let eventId = req.body.eventId
+    let username = req.body.username
+    let rating = req.body.rating
+    try
+    {
+    let u_ID = await db.GetUserID(username)
+
+        let queryResult=await db.AddRating(eventId,u_ID,rating)
+        console.log("Rating added!!")
+    }
+    catch(err){
+        console.log("Error:"+err)
+        res.sendStatus(500)
+    }
 })
 
 module.exports=events
