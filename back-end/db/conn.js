@@ -213,6 +213,15 @@ const  conn = mysql.createConnection({
 
     }
 
+    dataPool.AddRating=(d_ID,u_ID,rating)=>{
+      return new Promise ((resolve, reject)=>{
+          conn.query(`INSERT INTO Ocena (vrednost,d_ID,u_ID) VALUES (?,?,?)`, [rating,d_ID,u_ID], (err,res)=>{
+          if(err){return reject(err)}
+          return resolve(res)
+          })
+      })
+    }
+
 
  conn.connect((err) => {
       if(err){
