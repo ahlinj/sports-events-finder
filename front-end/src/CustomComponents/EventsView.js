@@ -59,8 +59,20 @@ class EventsView extends React.Component
     })
   }
 
-  SendRating = (e) => {
-    console.log(e.target.value)
+  SendRating = (eventId,e) => {
+    if(e.target.value !== "0" && this.state.joinedEvents.map(event => event.d_ID).includes(eventId)){
+    axios.post(API_URL+'/events/rating',{
+      eventId: eventId,
+      username: this.props.username,
+      rating: e.target.value
+    })
+    .then(res=>{
+
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  }
   }
 
 
@@ -95,7 +107,8 @@ class EventsView extends React.Component
                     <td>{evt.orgIme}</td>
                     <td>{unique ? unique.uniqueUser : "0"}</td>
                     <td>
-                    <select onChange={(e) => this.SendRating(e)} name="rating" className="form-control" id="ratingSelect">
+                    <select onChange={(e) => this.SendRating(evt.id,e)} name="rating" className="form-control" id="ratingSelect">
+                      <option value="0">Select</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
