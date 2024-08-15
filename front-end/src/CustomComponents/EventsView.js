@@ -117,7 +117,9 @@ class EventsView extends React.Component
                     </select>
                     </td>
                     <td>
-                    {this.state.joinedEvents.map(event => event.d_ID).includes(evt.id) ? null : (
+                    {this.state.joinedEvents.map(event => event.d_ID).includes(evt.id) ? (
+                      <button className="btn btn-secondary" disabled>Joined</button>
+                      ) : (
                       <button
                         onClick={() => this.handleJoin(evt.id)}
                         className="btn btn-primary"
