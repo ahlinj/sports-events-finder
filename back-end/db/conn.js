@@ -231,6 +231,15 @@ const  conn = mysql.createConnection({
       })
     }
 
+    dataPool.AddComment=(d_ID,u_ID,comment)=>{
+      return new Promise ((resolve, reject)=>{
+          conn.query(`INSERT INTO Komentar (datum, sporocilo, d_ID, u_ID) VALUES (NOW() ,?, ?, ?) ON DUPLICATE KEY UPDATE datum = VALUES(datum), sporocilo = VALUES(sporocilo)`, [comment,d_ID,u_ID], (err,res)=>{
+          if(err){return reject(err)}
+          return resolve(res)
+          })
+      })
+    }
+
 
  conn.connect((err) => {
       if(err){
