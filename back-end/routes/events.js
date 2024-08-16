@@ -124,4 +124,24 @@ events.post('/rating', async (req, res) => {
     }
 })
 
+//Inserts a new comment in our database
+events.post('/comment', async (req, res) => {
+    
+    let eventId = req.body.eventId
+    let username = req.body.username
+    let comment = req.body.comment
+    try
+    {
+    let u_ID = await db.GetUserID(username)
+
+        let queryResult=await db.AddComment(eventId,u_ID,comment)
+        console.log("Comment added!!")
+        res.sendStatus(201)
+    }
+    catch(err){
+        console.log("Error:"+err)
+        res.sendStatus(500)
+    }
+})
+
 module.exports=events
