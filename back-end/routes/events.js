@@ -7,12 +7,15 @@ events.get('/', async (req,res, next)=>{
     try{
         let queryResult=await db.allEvents()
         let queryResult2=await db.UniqueUsersInEvent()
+        let queryResult3=await db.GetAverageRatings()
         res.json({
             events:queryResult,
-            uniqueUsers:queryResult2
+            uniqueUsers:queryResult2,
+            ratings:queryResult3
         })
         console.log(queryResult)
         console.log(queryResult2)
+        console.log(queryResult3)
     }
     catch(err){
         console.log(err)
@@ -113,6 +116,7 @@ events.post('/rating', async (req, res) => {
 
         let queryResult=await db.AddRating(eventId,u_ID,rating)
         console.log("Rating added!!")
+        res.sendStatus(201)
     }
     catch(err){
         console.log("Error:"+err)

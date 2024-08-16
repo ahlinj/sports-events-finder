@@ -222,6 +222,15 @@ const  conn = mysql.createConnection({
       })
     }
 
+    dataPool.GetAverageRatings=()=>{
+      return new Promise ((resolve, reject)=>{
+          conn.query(`SELECT d_ID, AVG(vrednost) AS average_vrednost FROM Ocena GROUP BY d_ID`, (err,res)=>{
+          if(err){return reject(err)}
+          return resolve(res)
+          })
+      })
+    }
+
 
  conn.connect((err) => {
       if(err){
