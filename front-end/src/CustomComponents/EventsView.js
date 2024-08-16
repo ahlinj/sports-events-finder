@@ -9,7 +9,8 @@ class EventsView extends React.Component
     this.state = {
       events: [],
       joinedEvents: [],
-      uniqueUsers: []
+      uniqueUsers: [],
+      ratings: []
     }
   }
 
@@ -22,7 +23,8 @@ class EventsView extends React.Component
       .then(res => {
         this.setState({
           events: res.data.events,
-          uniqueUsers: res.data.uniqueUsers
+          uniqueUsers: res.data.uniqueUsers,
+          ratings: res.data.ratings
         })
         this.checkJoinedEvents()
       })
@@ -67,7 +69,7 @@ class EventsView extends React.Component
       rating: e.target.value
     })
     .then(res=>{
-
+      this.fetchEvents()
     })
     .catch(err=>{
       console.log(err)
@@ -92,7 +94,8 @@ class EventsView extends React.Component
                   <th>Date & Time</th>
                   <th>Organizer</th>
                   <th>Participants</th>
-                  <th>Rating</th>
+                  <th>Average rating</th>
+                  <th>Add rating</th>
                 </tr>
               </thead>
               <tbody>
@@ -106,6 +109,9 @@ class EventsView extends React.Component
                     <td>{formatDateTime(evt.datumCas)}</td>
                     <td>{evt.orgIme}</td>
                     <td>{unique ? unique.uniqueUser : "0"}</td>
+                    <td>
+                    {this.state.ratings.filter(rat => rat.d_ID === evt.id).map(rat => rat.average_vrednost)[0] || 0}
+                    </td>
                     <td>
                     {this.state.joinedEvents.map(event => event.d_ID).includes(evt.id) ? (
                     <select onChange={(e) => this.SendRating(evt.id,e)} name="rating" className="form-control" id="ratingSelect">
