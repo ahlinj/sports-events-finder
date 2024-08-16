@@ -10,7 +10,11 @@ class EventsView extends React.Component
       events: [],
       joinedEvents: [],
       uniqueUsers: [],
-      ratings: []
+      ratings: [],
+      comment:{
+        event:"",
+        text:""
+      }
     }
   }
 
@@ -77,10 +81,30 @@ class EventsView extends React.Component
   }
   }
 
+  QGetTextFromField=(e)=>{
+    this.setState(prevState=>({
+        comment:{...prevState.comment,[e.target.name]:e.target.value}
+      }))
+  }
+
+  QPostSignup=()=>{
+    axios.post(API_URL+'/events/comment',{
+      eventId:this.state.comment.event,
+      comment:this.state.comment.text,
+      username:this.props.username
+    })
+    .then(response=>{
+      console.log("Sent to server...")
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  }
 
   render()
   {
     return(
+      <>
       <div className="card" style={{ width: "80%", margin: "20px auto" }}>
         <h2 className="card-header">Events</h2>
         <div className="card-body">
@@ -141,12 +165,32 @@ class EventsView extends React.Component
                     )}
                     </td>
                   </tr>
-                );
+                )
               })}
             </tbody>
             </table>
         </div>
       </div>
+      <div className="card" style={{width:"400px", marginLeft:"auto", marginRight:"auto", marginTop:"10px", marginBottom:"10px"}}>
+      <h4 className="card-header">Add a comment</h4>
+      <form style={{margin:"20px"}} >
+        <label className="form-label">Choose an event</label>
+        <select name="event" className="form-control" id="commentSelect" onChange={(e)=>this.QGetTextFromField(e)}>
+          {this.state.joinedEvents.map(event => (
+            <option key={event.d_ID} value={event.d_ID}>
+              {this.state.events.find(evt => evt.id === event.d_ID).ime}
+            </option>
+          ))}
+        </select>
+        <p></p>
+        <div className="mb-3">
+          <label className="form-label">Write a comment</label>
+          <textarea onChange={(e)=>this.QGetTextFromField(e)} name="text" type="text" className="form-control" id="exampleInputEmail1" rows="4"/>
+        </div>
+      </form>
+      <button onClick={()=>this.QPostSignup()} style={{margin:"10px"}}  className="btn btn-primary bt">Submit</button>
+      </div>
+      </>
     )
   }
 }
