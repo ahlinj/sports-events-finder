@@ -11,6 +11,7 @@ class EventsView extends React.Component
       joinedEvents: [],
       uniqueUsers: [],
       ratings: [],
+      comments:[],
       comment:{
         event:"",
         text:""
@@ -95,6 +96,21 @@ class EventsView extends React.Component
     })
     .then(response=>{
       console.log("Sent to server...")
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  }
+
+  GetComments=(e)=>{
+    axios.post(API_URL+'/events/comment/all',{
+      event:e.target.value
+    })
+    .then(res=>{
+      console.log(res)
+      this.setState({
+        comments: res.data
+      })
     })
     .catch(err=>{
       console.log(err)
@@ -189,6 +205,41 @@ class EventsView extends React.Component
         </div>
       </form>
       <button onClick={()=>this.QPostSignup()} style={{margin:"10px"}}  className="btn btn-primary bt">Submit</button>
+      </div>
+      <p></p>
+      <div className="card">
+      <h4 className="card-header">View comments</h4>
+      <form style={{margin:"20px"}} >
+        <label className="form-label">Choose an event</label>
+        <select name="event" className="form-control" id="commentSelect" onChange={(e)=>this.GetComments(e)}>
+          {this.state.events.map(event => (
+            <option key={event.d_ID} value={event.d_ID}>
+              {event.ime}
+            </option>
+          ))}
+        </select>
+        <p></p>
+        <table className="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Comment</th>
+                  <th>Date & Time</th>
+                </tr>
+              </thead>
+              <tbody>
+              {this.state.comments.map(cmt => {
+                return (
+                  <tr key={cmt.id}>
+                    <td>{cmt.ime}</td>
+                    <td>{cmt.sporocilo}</td>
+                    <td>{formatDateTime(cmt.datum)}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+            </table>
+      </form>
       </div>
       </>
     )
