@@ -111,6 +111,16 @@ const  conn = mysql.createConnection({
     })
     } 
 
+    dataPool.GetEventID=(name)=>{
+      return new Promise ((resolve, reject)=>{
+          conn.query('SELECT id FROM Dogodek WHERE ime = ?', name, (err,res, fields)=>{
+          if(err){return reject(err)}
+          return resolve(res[0].id)
+          })
+      })  
+      }
+
+
     dataPool.JoinEvent=(u_ID,d_ID)=>{
         return new Promise ((resolve, reject)=>{
             conn.query(`INSERT INTO Uporabnik_Dogodek (u_ID,d_ID) VALUES (?,?)`, [u_ID,d_ID], (err,res)=>{
@@ -234,6 +244,15 @@ const  conn = mysql.createConnection({
     dataPool.AddComment=(d_ID,u_ID,comment)=>{
       return new Promise ((resolve, reject)=>{
           conn.query(`INSERT INTO Komentar (datum, sporocilo, d_ID, u_ID) VALUES (NOW() ,?, ?, ?) ON DUPLICATE KEY UPDATE datum = VALUES(datum), sporocilo = VALUES(sporocilo)`, [comment,d_ID,u_ID], (err,res)=>{
+          if(err){return reject(err)}
+          return resolve(res)
+          })
+      })
+    }
+    
+    dataPool.GetCommentsByEvent=(d_ID)=>{
+      return new Promise ((resolve, reject)=>{
+          conn.query(`SELECT Komentar.*, Uporabnik.ime FROM Komentar JOIN Uporabnik ON Komentar.u_ID = Uporabnik.id WHERE Komentar.d_ID = ?`, d_ID, (err,res)=>{
           if(err){return reject(err)}
           return resolve(res)
           })

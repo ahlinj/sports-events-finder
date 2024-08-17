@@ -144,4 +144,21 @@ events.post('/comment', async (req, res) => {
     }
 })
 
+events.post('/comment/all', async (req, res) => {
+    
+    let event = req.body.event
+    try
+    {
+        let eventId=await db.GetEventID(event)
+        let queryResult=await db.GetCommentsByEvent(eventId)
+        console.log("Comments sent!!")
+        console.log(queryResult)
+        res.json(queryResult)
+    }
+    catch(err){
+        console.log("Error:"+err)
+        res.sendStatus(500)
+    }
+})
+
 module.exports=events
