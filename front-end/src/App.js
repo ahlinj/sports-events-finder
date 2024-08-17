@@ -53,7 +53,7 @@ class App extends React.Component
              case LOGIN:
                return <LoginView QUserFromChild={this.QSetUser}/>
              case EVENTS:
-               return (state.organizationStatus.logged || state.userStatus.logged) ? <EventsView username={this.state.userStatus.user}/> : <NotLoggedInView setView={this.QSetView}/>
+               return (state.userStatus.logged) ? <EventsView username={this.state.userStatus.user}/> : <NotLoggedInView setView={this.QSetView}/>
              case PRIZES:
                return (state.organizationStatus.logged || state.userStatus.logged) ? <PrizesView/> : <NotLoggedInView setView={this.QSetView}/>
              case ORGS:
@@ -109,10 +109,6 @@ class App extends React.Component
                                  </li>
 
                                  <li className="nav-item" >
-                                   <a onClick={()=>this.QSetView({page:EVENTS})} className="nav-link "  href="#">Events</a>
-                                 </li>
-
-                                 <li className="nav-item" >
                                    <a onClick={()=>this.QSetView({page:PRIZES})} className="nav-link "  href="#">Prizes</a>
                                  </li>
 
@@ -136,6 +132,9 @@ class App extends React.Component
 
                                  {this.state.userStatus.logged && (
                                   <>
+                                  <li className="nav-item" >
+                                    <a onClick={()=>this.QSetView({page:EVENTS})} className="nav-link "  href="#">Events</a>
+                                  </li>
                                   <li className="nav-item" >
                                    <a onClick={()=>this.QSetView({page:PROFILE})} className="nav-link "  href="#">Profile</a>
                                   </li>
