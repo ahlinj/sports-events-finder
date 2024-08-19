@@ -2,6 +2,7 @@ const express = require('express')
 const dotenv = require('dotenv')
 const cors=require("cors")
 const cookieParser = require("cookie-parser")
+const path = require("path")
 const app = express()
 dotenv.config()
 
@@ -12,7 +13,7 @@ const events = require("./routes/events.js")
 const tokens = require("./routes/tokens.js")
 const prizes = require("./routes/prizes.js")
 
-
+app.use(express.static(path.join(__dirname, "build")))
 app.use(cookieParser("somesecrets"))
 app.use(express.json())
 app.use(express.urlencoded({extended : true}));
@@ -24,9 +25,10 @@ app.use(cors({
 
 
 
-app.get("/",(req,res)=>{
-res.send("hola")
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html")) 
 })
+
 
 app.use("/users",users)
 app.use("/organizations",organizations)
