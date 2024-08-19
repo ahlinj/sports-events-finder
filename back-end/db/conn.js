@@ -94,7 +94,7 @@ const  conn = mysql.createConnection({
 
     dataPool.allEvents=()=>{
     return new Promise ((resolve, reject)=>{
-        conn.query(`SELECT Dogodek.*, Organizacija.ime AS orgIme FROM Dogodek JOIN Organizacija ON Dogodek.o_ID = Organizacija.id`, (err,res)=>{
+        conn.query(`SELECT Dogodek.*, Organizacija.ime AS orgIme FROM Dogodek JOIN Organizacija ON Dogodek.o_ID = Organizacija.id WHERE Dogodek.datumCas >= NOW()`, (err,res)=>{
         if(err){return reject(err)}
         return resolve(res)
         })
@@ -141,7 +141,7 @@ const  conn = mysql.createConnection({
 
     dataPool.CheckJoinedEvents=(u_ID)=>{
       return new Promise ((resolve, reject)=>{
-        conn.query(`SELECT DISTINCT d_ID FROM Uporabnik_Dogodek WHERE u_ID = ?`, u_ID, (err,res)=>{
+        conn.query(`SELECT DISTINCT Uporabnik_Dogodek.d_ID FROM Uporabnik_Dogodek JOIN Dogodek ON Uporabnik_Dogodek.d_ID = Dogodek.id WHERE Uporabnik_Dogodek.u_ID = ? AND Dogodek.datumCas >= NOW()`, u_ID, (err,res)=>{
         if(err){return reject(err)}
         return resolve(res)
         })
