@@ -54,7 +54,7 @@ class PrizesView extends React.Component
         </div>
       </div>
       <div className="card" style={{ width: "80%", margin: "20px auto" }}>
-        <h2 className="card-header">Currently available prizes</h2>
+        <h2 className="card-header">This month's prizes</h2>
         <div className="card-body">
            
             <table className="table">
@@ -78,7 +78,7 @@ class PrizesView extends React.Component
         </div>
       </div>
       <div className="card" style={{ width: "80%", margin: "20px auto" }}>
-        <h2 className="card-header">Current tokens leaderboard</h2>
+        <h2 className="card-header">Monthly tokens leaderboard</h2>
         <div className="card-body">
            
             <table className="table">

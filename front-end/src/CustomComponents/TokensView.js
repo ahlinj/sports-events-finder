@@ -58,7 +58,7 @@ class TokensView extends React.Component
           <h2 className="card-header">Tokens</h2>
         </div>
         <div className="card" style={{margin:"10px"}}>
-          <h6 className="card-header">Total token count</h6>
+          <h6 className="card-header">This month's token count</h6>
           <p style={{margin:"10px"}}>
             {this.state.totalTokens}
           </p >
