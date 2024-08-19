@@ -159,7 +159,7 @@ const  conn = mysql.createConnection({
 
     dataPool.GetTokenTotal=(u_ID)=>{
       return new Promise ((resolve, reject)=>{
-        conn.query(`SELECT SUM(vrednost) AS total_vrednost FROM Zeton WHERE u_ID = ?`, u_ID, (err,res)=>{
+        conn.query(`SELECT SUM(vrednost) AS total_vrednost FROM Zeton WHERE u_ID = ? AND MONTH(datumPrejetja) = MONTH(CURRENT_DATE()) AND YEAR(datumPrejetja) = YEAR(CURRENT_DATE())`, u_ID, (err,res)=>{
         if(err){return reject(err)}
         return resolve(res)
         })
@@ -178,7 +178,7 @@ const  conn = mysql.createConnection({
 
     dataPool.allTokensByUser=(u_ID)=>{
       return new Promise ((resolve, reject)=>{
-          conn.query(`SELECT Zeton.*, Dogodek.ime AS dogodekIme FROM Zeton JOIN Dogodek ON Zeton.d_ID = Dogodek.id WHERE Zeton.u_ID = ?`, u_ID ,(err,res)=>{
+          conn.query(`SELECT Zeton.*, Dogodek.ime AS dogodekIme FROM Zeton JOIN Dogodek ON Zeton.d_ID = Dogodek.id WHERE Zeton.u_ID = ? AND MONTH(Zeton.datumPrejetja) = MONTH(CURRENT_DATE()) AND YEAR(Zeton.datumPrejetja) = YEAR(CURRENT_DATE())`, u_ID ,(err,res)=>{
           if(err){return reject(err)}
           return resolve(res)
           })
